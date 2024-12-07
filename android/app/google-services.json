@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "445508040627",
+    "project_id": "faforlife-official",
+    "storage_bucket": "faforlife-official.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:445508040627:android:9af18ffbb9e47734b5fdc6",
+        "android_client_info": {
+          "package_name": "com.faforlifeofficial"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwB2NIM8nr1CMis7_loNZZApmC7B0Le4Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

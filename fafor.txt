@@ -1,0 +1,4 @@
+jks file imformation
+
+key-alias :- fafor@123
+key-store-password :- 123456
