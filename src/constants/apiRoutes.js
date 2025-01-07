@@ -68,6 +68,9 @@ export default {
   upgradePackage: "upgradePackage",
   upgradePackageProduct: "upgradePackageProduct",
   upgradePayment: "upgradePayment",
+
+  // achivemnt
+  getAchivementData: 'userRank'
 };
 
 // export default {

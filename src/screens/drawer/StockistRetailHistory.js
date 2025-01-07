@@ -41,8 +41,7 @@ const StockistRetailHistory = () => {
           selfid: global.userData.self_id,
         }
       );
-      // console.log("response", response?.data);
-      setStockistData(response?.data?.info);
+      setStockistData(response?.data);
     } catch (error) {
       console.error("Error making POST request:", error);
     } finally {
@@ -85,7 +84,7 @@ const StockistRetailHistory = () => {
           style={styles.balanceContainer}
         >
           <AppText
-            label={""}
+            label={stockistData?.bonus}
             size={"enormous"}
             fontFamily={Montserrat.Bold}
             color={colors.white}
@@ -98,7 +97,7 @@ const StockistRetailHistory = () => {
           />
         </ImageBackground>
         <FlatList
-          data={stockistData}
+          data={stockistData?.info}
           showsVerticalScrollIndicator={false}
           style={styles.flatList}
           contentContainerStyle={styles.innerContainer}

@@ -8,8 +8,7 @@ import OrderDetailTable from "../../components/OrderDetailTable";
 
 const OrderDetailScreen = () => {
   const route = useRoute();
-  const { data } = route.params;
-  console.log("data", data);
+  const { data, order_from } = route.params;
 
   return (
     <View>
@@ -35,6 +34,56 @@ const OrderDetailScreen = () => {
             </Text>
           </View>
         )}
+        {data?.country_name && (
+          <View style={styles.detailRow}>
+            <Text style={[styles.detailText, styles.labelText]}>
+              Country Name
+            </Text>
+            <Text style={[styles.detailText, { width: scale(145) }]}>
+              {data?.country_name}
+            </Text>
+          </View>
+        )}
+        {data?.order_date && (
+          <View style={styles.detailRow}>
+            <Text style={[styles.detailText, styles.labelText]}>
+              Order Date
+            </Text>
+            <Text style={[styles.detailText, { width: scale(145) }]}>
+              {data?.order_date}
+            </Text>
+          </View>
+        )}
+        {data?.shipping_charge && (
+          <View style={styles.detailRow}>
+            <Text style={[styles.detailText, styles.labelText]}>
+              Shipping Charge
+            </Text>
+            <Text style={[styles.detailText, { width: scale(145) }]}>
+              {data?.shipping_charge}
+            </Text>
+          </View>
+        )}
+        {data?.discount && (
+          <View style={styles.detailRow}>
+            <Text style={[styles.detailText, styles.labelText]}>
+              Discount
+            </Text>
+            <Text style={[styles.detailText, { width: scale(145) }]}>
+              {data?.discount}
+            </Text>
+          </View>
+        )}
+        {data?.total_amount && (
+          <View style={order_from == 1 ? styles.detailRow : styles.detailRowMobile}>
+            <Text style={[styles.detailText, styles.labelText]}>
+              Total Amount
+            </Text>
+            <Text style={[styles.detailText, { width: scale(145) }]}>
+              {data?.total_amount}
+            </Text>
+          </View>
+        )}
         {data?.package_img && (
           <Image
             source={{
@@ -50,7 +99,7 @@ const OrderDetailScreen = () => {
         )}
       </View>
       <View style={styles.tableView}>
-        <OrderDetailTable data={data?.package_products} />
+        <OrderDetailTable data={data?.package_products} order_from={order_from} />
       </View>
     </View>
   );
@@ -91,6 +140,13 @@ const styles = StyleSheet.create({
     // justifyContent: 'space-between',
     marginTop: verticalScale(15),
     marginHorizontal: scale(15),
+  },
+  detailRowMobile: {
+    flexDirection: "row",
+    // justifyContent: 'space-between',
+    marginTop: verticalScale(15),
+    marginHorizontal: scale(15),
+    marginVertical: verticalScale(20),
   },
   detailText: {
     fontSize: scale(13),

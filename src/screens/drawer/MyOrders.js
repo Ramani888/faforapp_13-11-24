@@ -51,13 +51,13 @@ const MyOrders = () => {
 
   // ======================================= Api ======================================== //
 
-  const getRegUpgOrderDetail = async (orderId) => {
+  const getRegUpgOrderDetail = async (orderId, order_from) => {
     try {
       setVisible(true);
       const response = await axiosInstance.post(apiRoutes.regUpgOrderDetail, {
         order_id: orderId,
       });
-      navigation.navigate(screens.orderDetail,{data: response?.data?.info})
+      navigation.navigate(screens.orderDetail,{data: response?.data?.info, order_from: order_from})
     } catch (error) {
       console.error("Error making POST request:", error);
     } finally {
@@ -65,7 +65,7 @@ const MyOrders = () => {
     }
   };
 
-  const getRepurchaseOrderdetail = async (orderId) => {
+  const getRepurchaseOrderdetail = async (orderId, order_from) => {
     try {
       setVisible(true);
       const response = await axiosInstance.post(
@@ -74,7 +74,7 @@ const MyOrders = () => {
           order_id: orderId,
         }
       );
-      navigation.navigate(screens.orderDetail,{data: response?.data?.info})
+      navigation.navigate(screens.orderDetail,{data: response?.data?.info, order_from: order_from})
     } catch (error) {
       console.error("Error making POST request:", error);
     } finally {
@@ -83,7 +83,6 @@ const MyOrders = () => {
   };
 
   const renderItem = ({ item }) => {
-    // console.log('item',item)
     return (
       <View>
         <Row
@@ -107,9 +106,9 @@ const MyOrders = () => {
           containerStyle={styles.btnContainer}
           onPress={() => {
             if (item?.order_from == 1) {
-              getRegUpgOrderDetail(item?.id);
+              getRegUpgOrderDetail(item?.id, item?.order_from);
             } else {
-              getRepurchaseOrderdetail(item?.id);
+              getRepurchaseOrderdetail(item?.repurchase_order_id, item?.order_from);
             }
           }}
         />

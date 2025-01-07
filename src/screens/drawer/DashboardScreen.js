@@ -40,6 +40,8 @@ import {
 import AppText from "../../components/AppText";
 import { Montserrat } from "../../themes/fonts";
 import { useIsFocused } from "@react-navigation/native";
+import axiosInstance from "../../utils/axiosInstance";
+import apiRoutes from "../../constants/apiRoutes";
 
 const rankList = [
   { id: 0, image: images.sliver, key: "sliver" },
@@ -60,10 +62,30 @@ const DashboardScreen = ({ navigation }) => {
   const isFocused = useIsFocused()
   const [userData, setUserData] = useState({});
   const [leadershipRank, setLeadershipRank] = useState({});
+  const [visible, setVisible] = useState(false);
+  const [achivementData, setAchivementData] = useState([]);
 
   const dispatch = useDispatch();
   const userDetails = useSelector((state) => state.userDetails);
   const getLeadershipRes = useSelector((state) => state.getLeadership);
+
+  const getAchivementData = async () => {
+    try {
+      setVisible(true);
+      const response = await axiosInstance.post(
+        apiRoutes.getAchivementData,
+        {
+          id: global.userData.id,
+        }
+      );
+
+      setAchivementData(response?.data?.info);
+    } catch (error) {
+      console.error("Error making POST request:", error);
+    } finally {
+      setVisible(false);
+    }
+  };
 
   useEffect(() => {
     if (global.userData?.self_id) {
@@ -88,6 +110,7 @@ const DashboardScreen = ({ navigation }) => {
       self_id: global?.userData?.self_id,
     };
     dispatch(getLeadership(data));
+    getAchivementData();
   }, []);
 
   useEffect(() => {
@@ -105,16 +128,12 @@ const DashboardScreen = ({ navigation }) => {
       <View>
         <View style={styles.rankContainer}>
           <Image
-            source={item?.image}
+            source={{ uri: item?.image }}
             style={[styles.rankImage, item?.imgStyle && item?.imgStyle]}
           />
         </View>
         <AppText
-          label={
-            leadershipRank[item?.key] == 1
-              ? strings.achieved
-              : strings.inProgress
-          }
+          label={item?.status}
           size={"extraSmall"}
           fontFamily={Montserrat.SemiBold}
           color={colors.white}
@@ -122,7 +141,7 @@ const DashboardScreen = ({ navigation }) => {
             styles.status,
             {
               backgroundColor:
-                leadershipRank[item?.key] == 1 ? colors.green : colors.pink,
+                item?.status !== 'IN PROGRSS' ? colors.green : colors.pink,
             },
           ]}
         />
@@ -321,7 +340,7 @@ const DashboardScreen = ({ navigation }) => {
                 scrollEnabled={false}
                 numColumns={3}
                 key={"_"}
-                data={rankList}
+                data={achivementData}
                 keyExtractor={(_, i) => i.toString()}
                 renderItem={renderItem}
                 contentContainerStyle={styles.listContainer}

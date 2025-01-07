@@ -22,7 +22,7 @@ const TableHeader = () => (
   </View>
 );
 
-const TableRow = ({ item, index }) => (
+const TableRow = ({ item, order_from, index }) => (
   <View style={styles.tableRow}>
     <Text style={[styles.rowText, styles.rowSNo, styles.headerSNo]}>
       {index + 1}
@@ -42,7 +42,7 @@ const TableRow = ({ item, index }) => (
     >
       {item?.product_name}
     </Text>
-    <Text style={[styles.rowText, styles.headerQty]}>{item?.qty}</Text>
+    <Text style={[styles.rowText, styles.headerQty]}>{order_from == 1 ? item?.qty : item?.product_qty}</Text>
     <Text style={[styles.rowText, styles.headerPrice]}>
       {item?.product_price}
     </Text>
@@ -52,7 +52,7 @@ const TableRow = ({ item, index }) => (
   </View>
 );
 
-const OrderDetailTable = ({ data }) => {
+const OrderDetailTable = ({ data, order_from }) => {
   return (
     <ScrollView horizontal style={styles.container}>
       <View style={styles.table}>
@@ -62,7 +62,7 @@ const OrderDetailTable = ({ data }) => {
             data={data}
             renderItem={({ item, index }) => (
               <View>
-                <TableRow item={item} index={index} />
+                <TableRow item={item} order_from={order_from} index={index} />
                 {data?.length - 1 !== index && (
                   <View
                     style={styles.horizontalLine}
