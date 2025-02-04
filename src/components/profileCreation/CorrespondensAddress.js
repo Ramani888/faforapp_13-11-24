@@ -19,6 +19,7 @@ const CorrespondensAddress = ({
   selectedState,
   handleStateSelect
 }) => {
+    console.log('values',values)
   const renderBody = () => {
     return (
       <View>
@@ -69,9 +70,11 @@ const CorrespondensAddress = ({
           <CustomDropDown
             placeholder="Select State"
             data={stateData}
-            onSelect={handleStateSelect}
+            onSelect={selectedItem =>
+              setFieldValue('state', selectedItem.state_name)
+            }
             // onSelect={setState}
-            selected={selectedState.state_name}
+            selected={values?.state}
             errors={errors.state}
             touched={touched.state}
             labelKey={'state_name'}

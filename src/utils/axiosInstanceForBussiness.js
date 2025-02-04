@@ -17,6 +17,7 @@ axiosInstanceForBussiness.interceptors.request.use(
     return config;
   },
   error => {
+    console.log('error',error)
     return Promise.reject(error);
   },
 );

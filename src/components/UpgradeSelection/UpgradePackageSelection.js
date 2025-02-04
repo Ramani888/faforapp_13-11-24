@@ -31,13 +31,14 @@ const UpgradePackageSelection = ({
   // =================================== Api ================================== //
 
   const getPackageData = async () => {
+    console.log('global?.userData',global?.userData)
     try {
       setVisible(true);
       const response = await axiosInstanceForBussiness.post(
         `${apiRoutes.businessUpgrade}/${apiRoutes.upgradePackage}`,
         {package_id: global?.userData?.package},
       );
-      console.log('global', global?.userData)
+      console.log('data', response)
       setPackageData(response?.data?.package);
     } catch (error) {
       console.error('Error making POST request:', error);

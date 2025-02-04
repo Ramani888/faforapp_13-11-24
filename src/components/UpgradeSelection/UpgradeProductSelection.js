@@ -69,6 +69,7 @@ const UpgradeProductSelection = ({
           user_id: global?.userData?.id
         },
       );
+      console.log('response',response)
       global.after_purchase = response?.data?.after_purchase;
       global.current_package_pv = response?.data?.current_package_pv;
       global.upgrade_package_pv = response?.data?.upgrade_package_pv;
