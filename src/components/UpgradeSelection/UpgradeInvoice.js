@@ -46,6 +46,8 @@ const UpgradeInvoice = ({
     {key: 'You Get After Purchase', value: global.after_purchase},
     {key: 'Total Pay', value: totalAmount},
     {key: 'Upgrade Package PV', value: global.upgrade_package_pv},
+    {key: 'Discount', value: global.discount},
+    {key: 'Pay After Discount', value: global.pay_amount},
   ];
 
   // ================================== Api =================================== //

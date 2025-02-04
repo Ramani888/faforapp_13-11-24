@@ -31,6 +31,8 @@ const ProductSelection = ({
   const [productData, setProductData] = useState([]);
   const [cart, setCart] = useState([]);
   const [priceLimit, setPriceLimit] = useState('');
+  const [discount, setDiscount] = useState('');
+  const [payAmount, setPayAmount] = useState('');
 
   useEffect(() => {
     getPackageProduct();
@@ -73,6 +75,8 @@ const ProductSelection = ({
         },
       );
       setPriceLimit(response?.data?.product_price);
+      setPayAmount(response?.data?.pay_amount)
+      setDiscount(response?.data?.discount)
 
       const productsWithCartStatus = response.data?.products.map(product => ({
         ...product,
@@ -257,6 +261,12 @@ const ProductSelection = ({
         </View>
         <Text style={styles.limitText}>
           According to your package your amount limit is {priceLimit}
+        </Text>
+        <Text style={styles.limitText}>
+          Discount: {discount}
+        </Text>
+        <Text style={styles.limitText}>
+          Pay After Discount: {payAmount}
         </Text>
         <View style={styles.buttonView}>
           <CustomeButtonView
