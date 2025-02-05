@@ -17,14 +17,12 @@ const RepurchasePurchaseBill = () => {
   const navigation = useNavigation();
   const [isLoading, setIsLoading] = useState(false);
   const cartData = global.repurchaseCartData;
+  const discount = global.repurchaseDiscount;
   const sendCartData = cartData.map(item => ({
     product_id: item.id,
     mrp: item.price,
     qty: item.qty,
   }));
-
-  console.log('sendCartData', sendCartData)
-  console.log('cartData', cartData)
 
   const totalAmount = cartData.reduce((accumulator, item) => {
     return accumulator + parseFloat(item.totalAmount);
@@ -114,6 +112,11 @@ const RepurchasePurchaseBill = () => {
               <View style={styles.itemsRow}>
                 <Text style={styles.itemsLabel}>Shipping Charge</Text>
                 <Text style={styles.itemsValue}>0</Text>
+              </View>
+              <View style={styles.separator} />
+              <View style={styles.itemsRow}>
+                <Text style={styles.itemsLabel}>discount</Text>
+                <Text style={styles.itemsValue}>{discount}</Text>
               </View>
               <View style={styles.separator} />
               <View style={styles.itemsRow}>

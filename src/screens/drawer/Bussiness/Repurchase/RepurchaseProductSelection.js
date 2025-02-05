@@ -30,6 +30,7 @@ const RepurchaseProductSelection = () => {
   const [search, setSearch] = useState('');
   const [productData, setProductData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [discount, setDiscount] = useState('');
   const [cart, setCart] = useState([]);
   
   console.log('productData', productData[0])
@@ -76,6 +77,7 @@ const RepurchaseProductSelection = () => {
         quantity: 1,
       }));
       setProductData(productsWithCartStatus);
+      setDiscount(response?.data?.discount)
       loadCartFromAsyncStorage();
     } catch (error) {
       console.error('Error making POST request:', error);
@@ -189,6 +191,7 @@ const RepurchaseProductSelection = () => {
         totalPV: totalPV.toFixed(2),
       };
     });
+    global.repurchaseDiscount = discount;
 
     navigation.navigate(screens.repurchasePurchaseBill);
   };
