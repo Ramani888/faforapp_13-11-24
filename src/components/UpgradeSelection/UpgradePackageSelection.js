@@ -65,9 +65,7 @@ const UpgradePackageSelection = ({
           key={index}
           item={item}
           imageUri={item?.package_img}
-          badgeUri={
-            'https://image.similarpng.com/very-thumbnail/2021/05/Right-Correct-check-in-Green-Icon-Sign-on-transparent-background-PNG.png'
-          }
+          badgeUri={require('../../assets/images/selected.png')}
           setSelectedProduct={setSelectedPackage}
           selectedProduct={selectedPackage}
           index={index}

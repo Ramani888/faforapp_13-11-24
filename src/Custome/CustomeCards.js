@@ -26,7 +26,7 @@ const CustomeCards = ({
       }}>
       <View style={styles.imageContainer}>
         <Image source={{uri: imageUri}} style={styles.image} />
-        {isSelected && <Image source={{uri: badgeUri}} style={styles.badge} />}
+        {isSelected && <Image source={badgeUri} style={styles.badge} />}
       </View>
       {title && description && price && (
         <View style={styles.textContainer}>
