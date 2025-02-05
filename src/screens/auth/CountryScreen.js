@@ -197,11 +197,10 @@ const CountryScreen = ({ navigation }) => {
           style={styles.imageStyle}
           source={{
             uri: item.country_flag,
-            priority: FastImage.priority.high,
+            priority: FastImage.priority.normal,
             cache: FastImage.cacheControl.immutable,
           }}
           resizeMode={FastImage.resizeMode.cover}
-          resizeMethod="resize"
         />
         <Text style={styles.cardText}>{item.name}</Text>
       </TouchableOpacity>
